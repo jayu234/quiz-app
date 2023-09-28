@@ -13,7 +13,6 @@ import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 
 function PastQuizDetails() {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const { id } = useParams();
     const { data } = useSelector((state) => state.user.quizHistory);
     const [quizDetails, setQuizDetails] = useState({});
@@ -26,24 +25,25 @@ function PastQuizDetails() {
         setMarks(score);
     }, [])
     useEffect(() => {
-        const details = data.map((item, idx) => {
-            if(item._id === id){
-                return {...item, index: idx};
+        let details = {};
+        for (let i = 0; i < data.length; i++) {
+            if(data[i]._id===id){
+                details = {...data[i], index: i}
             }
-        })[0];
+        }
         setQuizDetails(details);
     }, [id])
     return (
         <Grid sx={{ paddingX: "2rem", paddingY: "1rem" }} flexDirection={"column"} justifyContent={"space-between"}>
-            
+
             {/* <---------- Back button ---------->*/}
             <Grid item>
-                <IconButton onClick={()=>{navigate("/quiz-history")}} sx={{color: "white"}}><ArrowBackRoundedIcon/></IconButton>
+                <IconButton onClick={() => { navigate("/quiz-history") }} sx={{ color: "white" }}><ArrowBackRoundedIcon /></IconButton>
             </Grid>
 
             {/* <---------- Heading ----------> */}
             <Grid item>
-                <Typography variant='h4' align='center' fontFamily={"inherit"}>Quiz - {quizDetails?.index+1}</Typography>
+                <Typography variant='h4' align='center' fontFamily={"inherit"}>Quiz - {quizDetails?.index + 1}</Typography>
                 <Typography variant='h6' align='center' fontFamily={"inherit"} mb={2}>You&#039;ve scored {marks} out of 15!!</Typography>
             </Grid>
 
