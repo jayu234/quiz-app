@@ -13,6 +13,7 @@ jobs:
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Build docker image
+        working-directory: backend
         run: docker build -t jaivik23/quizapp-backend .
       - name: Publish image to docker hub
         run: docker push jaivik23/quizapp-backend:latest
