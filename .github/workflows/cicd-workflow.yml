@@ -27,4 +27,4 @@ jobs:
       - name: Delete old container
         run: docker rm -f quizapp-backend
       - name: Run docker container
-        run: docker run -d -p 5000:5000 --name quizapp-backend-container jaivik23/quizapp-backend
+        run: docker run -d -p 5000:5000 --name quizapp-backend jaivik23/quizapp-backend
