@@ -11,6 +11,10 @@ app.use(cors({
 }));
 app.use(express.json());
 
+app.get("/", async (req,res)=>{
+    res.send("Hello world");
+})
+
 // Two main Routes
 const users = require("./routes/userRoutes");
 const quiz = require("./routes/quizRoutes");
