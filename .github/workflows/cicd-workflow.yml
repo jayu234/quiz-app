@@ -7,6 +7,11 @@ on:
 jobs:
   build:
     runs-on: [ubuntu-latest]
+    env:
+      DB_URI: ${{ secrets.DB_URI }}
+      HOST: ${{ secrets.HOST }}
+      PORT: ${{ secrets.PORT }}
+      FRONTEND: ${{ secrets.FRONTEND }}
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
@@ -27,4 +32,4 @@ jobs:
       - name: Delete old container
         run: docker rm -f quizapp-backend
       - name: Run docker container
-        run: docker run -d -p 5000:5000 --name quizapp-backend jaivik23/quizapp-backend
+        run: docker run -d -p 5000:5000 -e DB_URI=$DB_URI -e HOST=$HOST -e PORT=$PORT -e FRONTEND=$FRONTEND --name quizapp-backend jaivik23/quizapp-backend
